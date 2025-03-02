@@ -1,4 +1,4 @@
-[![Wallbit](./assets/logo.jpg)](https://wallbit.io/)
+[![Wallbit](./public/assets/logo.png)](https://wallbit.io/)
 
 > El banco digital para trabajadores remotos.
 
@@ -12,10 +12,12 @@ Cada vez que se agrega un producto, vamos a obtener el producto desde la API y l
 
 La aplicación se vería así:
 
-![Sin productos](./assets/app-0.jpg)
+![Sin productos](./public/assets/app-0.jpg)
+
 > Inicialmente no hay productos en el carrito
 
-![Con productos](./assets/app-1.jpg)
+![Con productos](./public/assets/app-1.jpg)
+
 > Con productos en el carrito
 
 ## Requisitos
@@ -55,7 +57,7 @@ El ganador va a ser elegido por el chat, la gente de Wallbit y yo.
 > [!IMPORTANT]
 > El ganador debe estar presente en el stream para recibir el premio.
 
-![Razer Seiren Mini](./assets/sorteo.jpg)
+![Razer Seiren Mini]
 
 > En caso de no poder enviarse el premio, se pagará el equivalente de 70 USD.
 
