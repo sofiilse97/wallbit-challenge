@@ -1,0 +1,9 @@
+.store-container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  width: fit-content;
+  margin: auto;
+  padding: 16px;
+}
