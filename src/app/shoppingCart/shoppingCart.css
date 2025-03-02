@@ -1,0 +1,35 @@
+table {
+  border: 2px solid white;
+  border-collapse: collapse;
+  margin-top: 16px;
+}
+
+thead,
+tbody {
+  border-bottom: 1px solid white;
+}
+
+thead th,
+tbody td {
+  text-align: left;
+}
+
+tfoot th {
+  text-align: right;
+}
+
+th,
+td {
+  padding: 5px 10px;
+}
+
+td.product-title {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+th.cart-total {
+  font-weight: 500;
+}
