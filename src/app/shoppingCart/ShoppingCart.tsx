@@ -1,6 +1,6 @@
-import { useState } from "react";
 import "./shoppingCart.css";
-import { CartType } from "../context/CartContext";
+import { CartType } from "../types/cart";
+
 const ShoppingCart = ({
   cart,
   setCart,
@@ -8,7 +8,10 @@ const ShoppingCart = ({
   cart: CartType;
   setCart: (value: CartType) => void;
 }) => {
-  const parseDate = (date: Date) => {
+  const parseDate = (date: Date | string) => {
+    if (typeof date === "string") {
+      date = new Date(date);
+    }
     const day = date.getDate();
     const month = date.getMonth() + 1;
     const fullYear = date.getFullYear();
@@ -16,7 +19,10 @@ const ShoppingCart = ({
     return `${day}/${month}/${fullYear}`;
   };
 
-  const parseTime = (date: Date) => {
+  const parseTime = (date: Date | string) => {
+    if (typeof date === "string") {
+      date = new Date(date);
+    }
     const hours = date.getHours();
     const minutes = date.getMinutes() + 1;
 
