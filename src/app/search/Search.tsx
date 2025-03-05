@@ -1,6 +1,7 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { getProduct } from "../api/searchProduct";
-import { CartContext, CartType, ProductType } from "../context/CartContext";
+import { CartContext } from "../context/CartContext";
+import { ProductType } from "../types/cart";
 
 const Search = () => {
   const cartContext = useContext(CartContext);
