@@ -1,28 +1,13 @@
 import { useState } from "react";
 import "./shoppingCart.css";
-const ShoppingCart = () => {
-  const [cart, setCart] = useState({
-    id: 1,
-    createdAt: new Date(),
-    products: [
-      {
-        id: 1,
-        title: "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
-        price: 109.95,
-        description:
-          "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
-        category: "men's clothing",
-        image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
-        rating: {
-          rate: 3.9,
-          count: 120,
-        },
-        total: 2,
-      },
-    ],
-    cartTotal: 180,
-  });
-
+import { CartType } from "../context/CartContext";
+const ShoppingCart = ({
+  cart,
+  setCart,
+}: {
+  cart: CartType;
+  setCart: (value: CartType) => void;
+}) => {
   const parseDate = (date: Date) => {
     const day = date.getDate();
     const month = date.getMonth() + 1;
@@ -37,6 +22,17 @@ const ShoppingCart = () => {
 
     return `${hours}:${minutes}`;
   };
+
+  if (!cart)
+    return (
+      <div
+        style={{ maxWidth: "600px", border: "1px solid", padding: "8px 16px" }}
+      >
+        <h2 style={{ margin: 0 }}>Carrito de la compra - Vacío</h2>
+        Todavía no has añadido nada al carrito de la compra. Prueba a buscar
+        algún producto y añadirlo al carrito de la compra!!!
+      </div>
+    );
 
   return (
     <>
@@ -61,12 +57,12 @@ const ShoppingCart = () => {
           <tbody>
             {cart.products.map((product) => (
               <tr key={product.id}>
-                <td>{product.total}</td>
+                <td>{product.quantity}</td>
                 <td title={product.title} className="product-title">
                   {product.title}
                 </td>
-                <td>{product.price}€</td>
-                <td>{product.price * product.total}€</td>
+                <td>{product.price.toFixed(2)}€</td>
+                <td>{product.amount.toFixed(2)}€</td>
                 <td>
                   <img src={product.image} height={100} width={100} />
                 </td>
@@ -78,7 +74,7 @@ const ShoppingCart = () => {
               <th className="cart-total" colSpan={4}>
                 Total
               </th>
-              <td>{cart.cartTotal}€</td>
+              <td>{cart.cartTotal.toFixed(2)}€</td>
             </tr>
           </tfoot>
         </table>
