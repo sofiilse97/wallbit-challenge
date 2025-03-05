@@ -1,7 +1,16 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { getProduct } from "../api/searchProduct";
+import { CartContext, CartType, ProductType } from "../context/CartContext";
 
 const Search = () => {
+  const cartContext = useContext(CartContext);
+
+  if (!cartContext) {
+    throw new Error("ChildComponent must be used within a CartProvider");
+  }
+
+  const { cart, setCart } = cartContext;
+
   const inputCountRef = useRef(null);
   const inputProductRef = useRef(null);
   const [loading, setLoading] = useState(false);
@@ -30,6 +39,7 @@ const Search = () => {
       try {
         const product = await response.json();
         console.log("??", product);
+        addToCartFn({ product, cant: inputCountRef?.current?.value });
         setLoading(false);
       } catch (e) {
         console.error(e);
@@ -40,6 +50,64 @@ const Search = () => {
       console.error("Hubo un error al obtener el producto");
       alert(`Error code: ${response.status} `);
       setLoading(false);
+    }
+  };
+
+  const addToCartFn = ({
+    product,
+    cant,
+  }: {
+    product: ProductType;
+    cant: number;
+  }) => {
+    // TODO: improve this
+    if (!cart) {
+      setCart({
+        id: 1,
+        createdAt: new Date(),
+        products: [
+          {
+            ...product,
+            quantity: Number(cant),
+            amount: product.price * Number(cant),
+          },
+        ],
+        cartTotal: product.price * Number(cant),
+      });
+    } else {
+      // TODO: improve this
+      const findProduct = cart.products.find(
+        (element) => element.id === product.id
+      );
+      console.log("findProduct", findProduct);
+      if (findProduct) {
+        setCart({
+          ...cart,
+          products: [...cart.products].map((productCopy) => {
+            return productCopy.id === product.id
+              ? {
+                  ...productCopy,
+                  quantity: productCopy.quantity + Number(cant),
+                  amount: productCopy.amount + product.price * Number(cant),
+                }
+              : productCopy;
+          }),
+          cartTotal: cart.cartTotal + product.price * Number(cant),
+        });
+      } else {
+        setCart({
+          ...cart,
+          products: [
+            ...cart.products,
+            {
+              ...product,
+              quantity: Number(cant),
+              amount: product.price * Number(cant),
+            },
+          ],
+          cartTotal: cart.cartTotal + product.price * Number(cant),
+        });
+      }
     }
   };
 
