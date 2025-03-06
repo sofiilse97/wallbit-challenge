@@ -1,5 +1,6 @@
 import "./shoppingCart.css";
-import { CartType } from "../types/cart";
+import { CartType, ProductType } from "../types/cart";
+import { MdDelete } from "react-icons/md";
 
 const ShoppingCart = ({
   cart,
@@ -27,6 +28,16 @@ const ShoppingCart = ({
     const minutes = date.getMinutes() + 1;
 
     return `${hours}:${minutes}`;
+  };
+
+  const handleRemoveFromCart = (product: ProductType) => {
+    setCart({
+      ...cart,
+      products: [
+        ...cart.products.filter((productFind) => productFind.id !== product.id),
+      ],
+      cartTotal: cart.cartTotal - product.amount,
+    });
   };
 
   if (!cart)
@@ -70,7 +81,15 @@ const ShoppingCart = ({
                 <td>{product.price.toFixed(2)}€</td>
                 <td>{product.amount.toFixed(2)}€</td>
                 <td>
-                  <img src={product.image} height={100} width={100} />
+                  <div className="product-image-container">
+                    <img src={product.image} height={100} width={100} />
+                    <button
+                      className="product-button"
+                      onClick={() => handleRemoveFromCart(product)}
+                    >
+                      Eliminar
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}
