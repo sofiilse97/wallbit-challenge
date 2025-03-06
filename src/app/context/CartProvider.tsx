@@ -3,6 +3,7 @@ import { CartContext } from "./CartContext";
 import {
   getCartFromLocalStorage,
   saveCartOnLocalStorage,
+  removeCartFromLocalStorage,
 } from "../utils/localStorage/cart";
 
 const CartProvider = ({ children }: { children: any }) => {
@@ -15,7 +16,11 @@ const CartProvider = ({ children }: { children: any }) => {
   }, []);
 
   useEffect(() => {
-    if (cart) saveCartOnLocalStorage(cart);
+    if (cart) {
+      saveCartOnLocalStorage(cart);
+    } else {
+      removeCartFromLocalStorage();
+    }
   }, [cart]);
 
   return (

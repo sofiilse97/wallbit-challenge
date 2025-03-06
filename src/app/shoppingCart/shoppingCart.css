@@ -1,7 +1,21 @@
+.cart-header {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  align-items: center;
+}
+
+.cart-header button {
+  width: 40px;
+  height: 40px;
+  padding: initial;
+}
+
 table {
   border: 2px solid white;
   border-collapse: collapse;
   margin-top: 16px;
+  width: 100%;
 }
 
 thead,

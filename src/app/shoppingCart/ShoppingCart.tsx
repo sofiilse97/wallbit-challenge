@@ -30,6 +30,10 @@ const ShoppingCart = ({
     return `${hours}:${minutes}`;
   };
 
+  const handleCleanCart = () => {
+    setCart(null);
+  };
+
   const handleRemoveFromCart = (product: ProductType) => {
     setCart({
       ...cart,
@@ -58,10 +62,15 @@ const ShoppingCart = ({
       <div
         style={{ maxWidth: "600px", border: "1px solid", padding: "8px 16px" }}
       >
-        <h2 style={{ margin: 0 }}>
-          Carrito de la compra - Iniciado {parseDate(cart.createdAt)} -{" "}
-          {parseTime(cart.createdAt)}
-        </h2>
+        <div className="cart-header">
+          <h2 style={{ margin: 0 }}>
+            Carrito de la compra - Iniciado {parseDate(cart.createdAt)} -{" "}
+            {parseTime(cart.createdAt)}
+          </h2>
+          <button onClick={() => handleCleanCart()}>
+            <MdDelete />
+          </button>
+        </div>
 
         <table>
           <thead>
