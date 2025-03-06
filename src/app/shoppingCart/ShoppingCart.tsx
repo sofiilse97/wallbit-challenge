@@ -46,8 +46,10 @@ const ShoppingCart = ({
         style={{ maxWidth: "600px", border: "1px solid", padding: "8px 16px" }}
       >
         <h2 style={{ margin: 0 }}>Carrito de la compra - Vacío</h2>
-        Todavía no has añadido nada al carrito de la compra. Prueba a buscar
-        algún producto y añadirlo al carrito de la compra!!!
+        <p>
+          Todavía no has añadido nada al carrito de la compra. Prueba a buscar
+          algún producto y añadirlo al carrito de la compra!!!
+        </p>
       </div>
     );
 
