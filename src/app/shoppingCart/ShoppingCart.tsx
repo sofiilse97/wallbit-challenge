@@ -1,6 +1,7 @@
 import "./shoppingCart.css";
 import { CartType, ProductType } from "../types/cart";
 import { MdDelete } from "react-icons/md";
+import { parseDate, parseTime } from "../utils/dates/date";
 
 const ShoppingCart = ({
   cart,
@@ -9,27 +10,6 @@ const ShoppingCart = ({
   cart: CartType;
   setCart: (value: CartType) => void;
 }) => {
-  const parseDate = (date: Date | string) => {
-    if (typeof date === "string") {
-      date = new Date(date);
-    }
-    const day = date.getDate();
-    const month = date.getMonth() + 1;
-    const fullYear = date.getFullYear();
-
-    return `${day}/${month}/${fullYear}`;
-  };
-
-  const parseTime = (date: Date | string) => {
-    if (typeof date === "string") {
-      date = new Date(date);
-    }
-    const hours = date.getHours();
-    const minutes = date.getMinutes() + 1;
-
-    return `${hours}:${minutes}`;
-  };
-
   const handleCleanCart = () => {
     setCart(null);
   };
